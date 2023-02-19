@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Halaman Login</title>
+    <style>
+		body {
+		font-family: Arial, Helvetica, sans-serif;
+		}
+
+		input[type=text],
+		input[type=password] {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		display: inline-block;
+		border: 1px solid #ccc;
+		box-sizing: border-box;
+		}
+
+		button {
+		background-color: #4CAF50;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		cursor: pointer;
+		width: 100%;
+		opacity: 0.9;
+		}
+
+		button:hover {
+		opacity: 1;
+		}
+
+		.cancelbtn {
+		padding: 14px 20px;
+		background-color: #f44336;
+		}
+
+		.cancelbtn,
+		.loginbtn {
+		float: left;
+		width: 50%;
+		}
+
+		.clearfix::after {
+		content: "";
+		clear: both;
+		display: table;
+		}
+
+		#error {
+		color: red;
+		}
+
+		#blocked {
+		display: none;
+		color: white;
+		text-align: center;
+		}
+
+		.container {
+		padding: 8px 16px;
+		}	
+
+
+		/* background */
+
+		.login {
+		position: fixed;
+		z-index: 1;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background: url("https://www.kawanlamagroup.com/storage/659/header-milestone.jpg");
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-color: lightgrey;
+		/* Fallback color */
+		}
+
+
+		/* Content/Box */
+
+		.login-content {
+		margin: 100px auto 15% auto;
+		border: 1px solid #888;
+		max-width: 600px;
+		width: 90%;
+		}
+
+		.default {
+		background-color: #fefefe;
+		}
+
+		.blocked {
+		background-color: #f44336;
+		}
+
+		@media screen and (max-width: 300px) {
+		.cancelbtn,
+		.loginbtn {
+			width: 100%;
+		}
+		}
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript">
+		var attempts = 0;
+
+		function validate() {
+			var uname = document.getElementById("username-1").value;
+			var pword = document.getElementById("password-1").value;
+			var error = document.getElementById("error");
+			var loginF = document.getElementById("login-form");
+			var content = document.getElementById("content-1");
+
+		if (uname == "" || pword == "") {
+			error.innerHTML = "All feilds must be filled out.";
+			return false;
+			}
+
+		if (uname !== "taxklg" || pword !== "123456") {
+			error.innerHTML = "Username or Password is incorrect."
+			attempts++;
+			} else if (uname == "taxklg" && pword == "123456") {
+			loginF.submit();
+			return true;
+			}
+
+		if (attempts > 2) {
+			content.classList.remove("default");
+			content.classList.add("blocked");
+			loginF.style.display = "none";
+			document.getElementById("blocked").style.display = "block";
+			return false;
+			}
+			}
+
+		function timeAlert() {
+			alert("Your time limit has run out." + "\n" + "Please refresh the page to try again.");
+			window.location = "project.html"
+			}
+    </script>
+	</head>
+
+<body onload="setTimeout(timeAlert, 60000)">
+  <div class="login">
+    <div id="content-1" class="login-content default">
+
+      <form id="login-form" action="https://bit.ly/requestdocumenttax">
+        <div class="container">
+          <h1>Login</h1>
+          <p id="error"></p>
+        </div>
+
+        <div class="container">
+          <label for="uname"><b>Username</b></label>
+          <input type="text" id="username-1" name="uname" placeholder="Enter Username" required>
+
+          <label for="psw"><b>Password</b></label>
+          <input type="password" id="password-1" name="psw" placeholder="Enter Password" required>
+
+          <div class="clearfix">
+            <button type="button" onclick="location.reload();" class="cancelbtn">Cancel</button>
+            <button type="button" onclick="validate();" class="loginbtn">Login</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
